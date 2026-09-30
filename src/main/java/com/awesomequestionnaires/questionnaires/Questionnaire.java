@@ -39,4 +39,15 @@ public class Questionnaire {
     private OffsetDateTime updated_at;
 
     public Questionnaire() {}
+
+    public Questionnaire(String name, String description, QuestionnaireStatus status, boolean active) {
+        this.name = name;
+        this.description = description;
+        this.status = status;
+        this.active = active;
+    }
+
+    public UUID getId() {
+        return id;
+    }
 }
