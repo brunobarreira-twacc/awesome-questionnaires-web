@@ -4,4 +4,4 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface QuestionnaireRepository extends  JpaRepository<Questionnaire, UUID> {}
+public interface QuestionnaireRepository extends JpaRepository<Questionnaire, UUID> {}
