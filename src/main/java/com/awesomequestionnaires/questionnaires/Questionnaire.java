@@ -30,9 +30,11 @@ public class Questionnaire {
     @Column
     private boolean active;
 
+    @Column(name="created_at")
     @CreationTimestamp
     private OffsetDateTime created_at;
 
+    @Column(name="updated_at")
     @UpdateTimestamp
     private OffsetDateTime updated_at;
 
