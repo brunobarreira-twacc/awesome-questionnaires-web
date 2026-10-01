@@ -50,4 +50,28 @@ public class Questionnaire {
     public UUID getId() {
         return id;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public QuestionnaireStatus getStatus() {
+        return status;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public OffsetDateTime getCreated_at() {
+        return created_at;
+    }
+
+    public OffsetDateTime getUpdated_at() {
+        return updated_at;
+    }
 }
