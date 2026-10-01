@@ -1,8 +1,8 @@
 package com.awesomequestionnaires.questionnaires;
 
-import java.util.UUID;
-
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service 
 public class QuestionnaireService {
@@ -20,5 +20,9 @@ public class QuestionnaireService {
         Questionnaire questionnaire = new Questionnaire(name, description, questionnaireStatus, activeFIXED);
         Questionnaire saveNewQuestionnaire = this.questionnaireRepository.save(questionnaire);
         return saveNewQuestionnaire.getId();
+    }
+
+    public Iterable<Questionnaire> listAllQuestionnaires() {
+        return questionnaireRepository.findAll();
     }
 }
