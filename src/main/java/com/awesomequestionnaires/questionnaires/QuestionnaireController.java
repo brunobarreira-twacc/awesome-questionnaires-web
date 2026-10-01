@@ -1,6 +1,8 @@
 package com.awesomequestionnaires.questionnaires;
 
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -33,7 +35,11 @@ public class QuestionnaireController {
     }
 
     @GetMapping("/questionnaires")
-    public ResponseEntity<Iterable<Questionnaire>> getAllQuestionnaires() {
+    public ResponseEntity<Iterable<Questionnaire>> getAllQuestionnaires(
+            @PageableDefault(size=50) Pageable paramsData
+            ) {
+        System.out.println(paramsData.getPageNumber());
+        System.out.println(paramsData.getPageSize());
         var questionnaires = questionnaireService.listAllQuestionnaires();
         return ResponseEntity.status(HttpStatus.OK).body(questionnaires);
     }
