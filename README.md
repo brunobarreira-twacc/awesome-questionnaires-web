@@ -15,3 +15,8 @@ curl -XPOST -H "Content-type: application/json" -d '{
 "status": "PUBLICADO"
 }' 'http://localhost:8080/api/v1/questionnaires' | jq
 ```
+
+### Listar Questionário 
+```
+curl -XGET -H "Content-type: application/json" 'http://localhost:8080/api/v1/questionnaires'
+```
