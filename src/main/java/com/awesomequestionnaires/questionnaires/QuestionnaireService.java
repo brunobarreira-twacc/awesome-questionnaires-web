@@ -1,5 +1,7 @@
 package com.awesomequestionnaires.questionnaires;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -22,7 +24,7 @@ public class QuestionnaireService {
         return saveNewQuestionnaire.getId();
     }
 
-    public Iterable<Questionnaire> listAllQuestionnaires() {
-        return questionnaireRepository.findAll();
+    public Page<Questionnaire> listAllQuestionnaires(Pageable pageable) {
+        return questionnaireRepository.findAll(pageable);
     }
 }
