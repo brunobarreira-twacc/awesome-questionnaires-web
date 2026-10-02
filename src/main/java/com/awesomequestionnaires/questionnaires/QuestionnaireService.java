@@ -2,8 +2,11 @@ package com.awesomequestionnaires.questionnaires;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service 
@@ -26,5 +29,9 @@ public class QuestionnaireService {
 
     public Page<Questionnaire> listAllQuestionnaires(Pageable pageable) {
         return questionnaireRepository.findAll(pageable);
+    }
+
+    public Questionnaire findOneQuestionnaireById(UUID questionnaireId) {
+        return questionnaireRepository.findById(questionnaireId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Questionnaire not found"));
     }
 }
