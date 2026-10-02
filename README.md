@@ -16,7 +16,18 @@ curl -XPOST -H "Content-type: application/json" -d '{
 }' 'http://localhost:8080/api/v1/questionnaires' | jq
 ```
 
-### Listar Questionário 
+### Listar Questionários
+**Verbo:** GET
+**Descrição:** Listar todos questionários com paginação
+**Chamada de exemplo**
 ```
 curl -XGET -H "Content-type: application/json" 'http://localhost:8080/api/v1/questionnaires'
+```
+
+### Listar um Questionário por Id
+**Verbo:** GET
+**Descrição:** Listar um questionário por Id(utilize UUID), retorna 404 quando o questionário não é encontrado
+**Chamada de exemplo**
+```
+curl -XGET -H "Content-type: application/json" 'http://localhost:8080/api/v1/questionnaires/{questionnaireId}' | jq
 ```
