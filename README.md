@@ -31,3 +31,24 @@ curl -XGET -H "Content-type: application/json" 'http://localhost:8080/api/v1/que
 ```
 curl -XGET -H "Content-type: application/json" 'http://localhost:8080/api/v1/questionnaires/{questionnaireId}' | jq
 ```
+
+### Criar Questões
+```
+curl -XPOST -H "Content-type: application/json" -d '[
+    {
+        "questionType": "SINGLE_OPTION",
+        "displayText": "Primeira questão?"
+        "displayOrder" 1,
+    },
+    {
+        "questionType": "TEXT",
+        "displayText": "Segunda questão?"
+        "displayOrder" 2,
+    },
+    {
+        "questionType": "TEXT",
+        "displayText": "Terceira questão?"
+        "displayOrder" 3,
+    }
+]' 'http://localhost:8080/api/v1/questionnaires/13239982-cd29-4ee7-aafd-4093413ebae9/questions'
+```
