@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.awesomequestionnaires.questionnaires.dtos.request.CreateQuestionRequest;
+import com.awesomequestionnaires.questionnaires.dtos.response.CreateQuestionResponse;
 import com.awesomequestionnaires.questionnaires.services.QuestionService;
 
 import java.util.List;
@@ -43,11 +44,11 @@ public class QuestionnaireController {
     }
 
     @PostMapping("/questionnaires/{questionnaireId}/questions")
-    public ResponseEntity<List<UUID>> createQuestion(
+    public ResponseEntity<List<CreateQuestionResponse>> createQuestion(
         @PathVariable("questionnaireId") UUID questionnaireId,
         @RequestBody List<CreateQuestionRequest> requestData
     ) {
-        List<UUID> questions = this.questionService.createQuestions(questionnaireId, requestData);
+        List<CreateQuestionResponse> questions = this.questionService.createQuestions(questionnaireId, requestData);
         return ResponseEntity.status(HttpStatus.CREATED).body(questions);
     }
 
