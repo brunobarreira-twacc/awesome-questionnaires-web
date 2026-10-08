@@ -1,9 +1,7 @@
 package com.awesomequestionnaires.questionnaires;
 
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
 
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.PagedModel;
@@ -15,23 +13,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Optional;
+import com.awesomequestionnaires.questionnaires.dtos.request.CreateQuestionRequest;
+import com.awesomequestionnaires.questionnaires.services.QuestionService;
+
+import java.util.List;
 import java.util.UUID;
-
-
 @Controller
 @RequestMapping("/api/v1")
 public class QuestionnaireController {
 
     private final QuestionnaireService questionnaireService;
+    private final QuestionService questionService;
 
     public QuestionnaireController(
-        QuestionnaireService questionnaireServiceParam
+        QuestionnaireService questionnaireServiceParam,
+        QuestionService questionService
     ) {
         this.questionnaireService = questionnaireServiceParam;
+        this.questionService = questionService;
     }
 
     @PostMapping("/questionnaires")
@@ -40,6 +40,15 @@ public class QuestionnaireController {
     ) {
         UUID newQuestionnaire = this.questionnaireService.createQuestionnaire(requestData.name(), requestData.description(), requestData.status());
         return ResponseEntity.status(HttpStatus.CREATED).body(newQuestionnaire);
+    }
+
+    @PostMapping("/questionnaires/{questionnaireId}/questions")
+    public ResponseEntity<List<UUID>> createQuestion(
+        @PathVariable("questionnaireId") UUID questionnaireId,
+        @RequestBody List<CreateQuestionRequest> requestData
+    ) {
+        List<UUID> questions = this.questionService.createQuestions(questionnaireId, requestData);
+        return ResponseEntity.status(HttpStatus.CREATED).body(questions);
     }
 
     @GetMapping("/questionnaires")
