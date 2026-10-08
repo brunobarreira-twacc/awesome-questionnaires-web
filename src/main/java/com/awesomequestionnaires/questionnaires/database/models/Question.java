@@ -32,7 +32,7 @@ public class Question {
     @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     @Enumerated(EnumType.STRING)
     @Column(name="question_type", nullable = false)
-    private String questionType;
+    private QuestionType questionType;
 
     @Column(name="display_text")
     private String displayText;
@@ -58,7 +58,7 @@ public class Question {
     public Question() {
     }
 
-    public Question(String questionType, String displayText, String displayOrder, boolean status,
+    public Question(QuestionType questionType, String displayText, String displayOrder, boolean status,
             Questionnaire questionnaire) {
         this.questionType = questionType;
         this.displayText = displayText;
@@ -71,7 +71,7 @@ public class Question {
         return id;
     }
 
-    public String getQuestionType() {
+    public QuestionType getQuestionType() {
         return questionType;
     }
 
