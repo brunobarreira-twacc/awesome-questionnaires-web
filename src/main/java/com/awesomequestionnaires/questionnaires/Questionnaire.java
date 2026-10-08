@@ -6,7 +6,11 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.type.SqlTypes;
 
+import com.awesomequestionnaires.questionnaires.database.models.Question;
+
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -37,6 +41,9 @@ public class Questionnaire {
     @Column(name="updated_at")
     @UpdateTimestamp
     private OffsetDateTime updated_at;
+
+    @OneToMany(mappedBy = "questionnaire")
+    private List<Question> questions = new ArrayList<>();
 
     public Questionnaire() {}
 
