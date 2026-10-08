@@ -38,7 +38,7 @@ public class Question {
     private String displayText;
 
     @Column(name="display_order")
-    private String displayOrder;
+    private Integer displayOrder;
 
     @Column(name="status", nullable = false)
     private boolean status;
@@ -58,7 +58,7 @@ public class Question {
     public Question() {
     }
 
-    public Question(QuestionType questionType, String displayText, String displayOrder, boolean status,
+    public Question(QuestionType questionType, String displayText, Integer displayOrder, boolean status,
             Questionnaire questionnaire) {
         this.questionType = questionType;
         this.displayText = displayText;
@@ -79,11 +79,11 @@ public class Question {
         return displayText;
     }
 
-    public String getDisplayOrder() {
+    public Integer getDisplayOrder() {
         return displayOrder;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 
