@@ -34,21 +34,37 @@ curl -XGET -H "Content-type: application/json" 'http://localhost:8080/api/v1/que
 
 ### Criar Questões
 ```
-curl -XPOST -H "Content-type: application/json" -d '[
+curl -X POST -H "Content-type: application/json" -d '[
     {
         "questionType": "SINGLE_OPTION",
-        "displayText": "Primeira questão?"
-        "displayOrder" 1,
+        "displayText": "Primeira questão?",
+        "displayOrder": 1
     },
     {
         "questionType": "TEXT",
-        "displayText": "Segunda questão?"
-        "displayOrder" 2,
+        "displayText": "Segunda questão?",
+        "displayOrder": 2
     },
     {
         "questionType": "TEXT",
-        "displayText": "Terceira questão?"
-        "displayOrder" 3,
+        "displayText": "Terceira questão?",
+        "displayOrder": 3
     }
-]' 'http://localhost:8080/api/v1/questionnaires/13239982-cd29-4ee7-aafd-4093413ebae9/questions'
+]' 'http://localhost:8080/api/v1/questionnaires/bf508689-794b-4d9b-bdb2-6360ce8423a0/questions'
+```
+
+### Criar Opções de resposta
+```
+curl -X POST "http://localhost:8080/api/v1/questionnaires/bf508689-794b-4d9b-bdb2-6360ce8423a0/questions/c70f44bf-88c7-4e53-ac66-b0fc7a06ca0a/answer-options" \
+  -H "Content-Type: application/json" \
+  -d '[
+    {
+        "displayText": "Primeira opcao",
+        "displayOrder": 1
+    },
+    {
+        "displayText": "Segunda opcao",
+        "displayOrder": 2
+    }
+]'
 ```
