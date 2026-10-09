@@ -54,7 +54,7 @@ public class AnswerOption {
         return displayOrder;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 
@@ -65,4 +65,6 @@ public class AnswerOption {
     public OffsetDateTime getUpdatedAt() {
         return updatedAt;
     }
+
+    public Question getQuestion() { return question; }
 }
