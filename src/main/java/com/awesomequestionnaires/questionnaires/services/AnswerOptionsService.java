@@ -11,6 +11,7 @@ import com.awesomequestionnaires.questionnaires.dtos.request.CreateAnswerOptionR
 import com.awesomequestionnaires.questionnaires.dtos.response.CreateAnswerOptionResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -30,6 +31,7 @@ public class AnswerOptionsService {
         this.answerOptionsRepository = answerOptionsRepository;
     }
 
+    @Transactional
     public List<CreateAnswerOptionResponse> createAnswerOption(UUID questionnaireId, UUID questionId, List<CreateAnswerOptionRequest> createAnswerOptionData) {
         //1- VERIFICAR SE QUESTIONARIO EXISTE
         this.findOneQuestionnaireById(questionnaireId);
