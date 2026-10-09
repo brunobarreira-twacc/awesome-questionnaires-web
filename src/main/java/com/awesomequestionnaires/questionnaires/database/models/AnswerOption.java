@@ -1,29 +1,18 @@
 package com.awesomequestionnaires.questionnaires.database.models;
 
-import com.awesomequestionnaires.questionnaires.Questionnaire;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.type.SqlTypes;
 
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name="questions")
-public class Question {
-
+@Table(name="answer_options")
+public class AnswerOption {
     @Id
     @GeneratedValue
     private UUID id;
-
-    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
-    @Enumerated(EnumType.STRING)
-    @Column(name="question_type", nullable = false)
-    private QuestionType questionType;
 
     @Column(name="display_text")
     private String displayText;
@@ -43,30 +32,18 @@ public class Question {
     private OffsetDateTime updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name="questionnaire_id", nullable = false)
-    private Questionnaire questionnaire;
+    @JoinColumn(name="question_id", nullable = false)
+    private Question question;
 
-    @OneToMany(mappedBy = "question")
-    private List<AnswerOption> answerOptions = new ArrayList<>();
+    public AnswerOption() {}
 
-    public Question() {
-    }
-
-    public Question(QuestionType questionType, String displayText, Integer displayOrder, boolean status,
-            Questionnaire questionnaire) {
-        this.questionType = questionType;
+    public AnswerOption(String displayText, Integer displayOrder) {
         this.displayText = displayText;
         this.displayOrder = displayOrder;
-        this.status = status;
-        this.questionnaire = questionnaire;
     }
 
     public UUID getId() {
         return id;
-    }
-
-    public QuestionType getQuestionType() {
-        return questionType;
     }
 
     public String getDisplayText() {
@@ -77,7 +54,7 @@ public class Question {
         return displayOrder;
     }
 
-    public boolean getStatus() {
+    public boolean isStatus() {
         return status;
     }
 
@@ -87,9 +64,5 @@ public class Question {
 
     public OffsetDateTime getUpdatedAt() {
         return updatedAt;
-    }
-
-    public Questionnaire getQuestionnaire() {
-        return questionnaire;
     }
 }
