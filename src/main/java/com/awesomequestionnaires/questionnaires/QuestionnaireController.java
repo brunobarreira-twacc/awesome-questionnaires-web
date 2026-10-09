@@ -1,5 +1,8 @@
 package com.awesomequestionnaires.questionnaires;
 
+import com.awesomequestionnaires.questionnaires.dtos.request.CreateAnswerOptionRequest;
+import com.awesomequestionnaires.questionnaires.dtos.response.CreateAnswerOptionResponse;
+import com.awesomequestionnaires.questionnaires.services.AnswerOptionsService;
 import jakarta.validation.Valid;
 
 import org.springframework.data.domain.Pageable;
@@ -26,13 +29,16 @@ public class QuestionnaireController {
 
     private final QuestionnaireService questionnaireService;
     private final QuestionService questionService;
+    private final AnswerOptionsService answerOptionsService;
 
     public QuestionnaireController(
         QuestionnaireService questionnaireServiceParam,
-        QuestionService questionService
+        QuestionService questionService,
+        AnswerOptionsService answerOptionsService
     ) {
         this.questionnaireService = questionnaireServiceParam;
         this.questionService = questionService;
+        this.answerOptionsService = answerOptionsService;
     }
 
     @PostMapping("/questionnaires")
@@ -50,6 +56,16 @@ public class QuestionnaireController {
     ) {
         List<CreateQuestionResponse> questions = this.questionService.createQuestions(questionnaireId, requestData);
         return ResponseEntity.status(HttpStatus.CREATED).body(questions);
+    }
+
+    @PostMapping("/questionnaires/{questionnaireId}/questions/{questionId}/answer-options")
+    public ResponseEntity<List<CreateAnswerOptionResponse>> createAnswerOption(
+            @PathVariable("questionnaireId") UUID questionnaireId,
+            @PathVariable("questionId") UUID questionId,
+            @RequestBody List<CreateAnswerOptionRequest> requestData
+    ) {
+        List<CreateAnswerOptionResponse> answerOptions = this.answerOptionsService.createAnswerOption(questionnaireId, questionId, requestData);
+        return ResponseEntity.status(HttpStatus.CREATED).body(answerOptions);
     }
 
     @GetMapping("/questionnaires")
