@@ -37,9 +37,11 @@ public class AnswerOption {
 
     public AnswerOption() {}
 
-    public AnswerOption(String displayText, Integer displayOrder) {
+    public AnswerOption(String displayText, Integer displayOrder, boolean status, Question question) {
         this.displayText = displayText;
         this.displayOrder = displayOrder;
+        this.status = status;
+        this.question = question;
     }
 
     public UUID getId() {
