@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.awesomequestionnaires.questionnaires.dtos.request.CreateQuestionRequest;
 import com.awesomequestionnaires.questionnaires.dtos.response.CreateQuestionResponse;
+import com.awesomequestionnaires.questionnaires.dtos.response.questionnaireDetailResponse.QuestionnaireDetailResponse;
 import com.awesomequestionnaires.questionnaires.services.QuestionService;
 
 import java.util.List;
@@ -80,8 +81,8 @@ public class QuestionnaireController {
     }
 
     @GetMapping("/questionnaires/{questionnaireId}")
-    public ResponseEntity<Questionnaire> getQuestionnaireById(@PathVariable("questionnaireId") UUID questionnaireId) {
-        Questionnaire response = this.questionnaireService.findOneQuestionnaireById(questionnaireId);
+    public ResponseEntity<QuestionnaireDetailResponse> getQuestionnaireById(@PathVariable("questionnaireId") UUID questionnaireId) {
+        QuestionnaireDetailResponse response = this.questionnaireService.findDetailedQuestionnaireById(questionnaireId);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
